@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <ons-navigator title="Navigator" var="myNavigator">
+        <ons-page>
+            <ons-toolbar>
+                <div class="center">
+                    <div class="app-background">
+                        <section style="padding: 8px 8px 8px">
+                            <ons-row style="color: wheat">
+                                <ons-col>
+                                    <ons-button modifier="cta" onclick="myNavigator.pushPage('list.html')">Lesson</ons-button>
+                                </ons-col>
+                                <ons-col>
+                                    <ons-button modifier="cta" onclick="myNavigator.pushPage('memos-list.html')">Memos</ons-button>
+                                </ons-col>
+                                <ons-col>
+                                    <ons-button modifier="cta">Favorite</ons-button>
+                                </ons-col>
+                            </ons-row>
+                        </section>
+                    </div>
+                </div>
+            </ons-toolbar>
+        <ons-page>
+            <ons-scroller>
+                <ons-list style="margin-top: 20px;">
+                    <div class="row" onclick="myNavigator.pushPage('single-instructor.html', { animation : 'slide' } )" ng-click="singleInstructorClick(teacher.id)" ng-repeat="memo in momes" style="border-bottom: 1px solid #ddd; margin-left: 5px; padding: 5px 0px 5px 0px">
+                        <div class="col-xs-12">
+                            {{ memo.text }}
+                        </div>
+                    </div>
+                </ons-list>
+            </ons-scroller>
+        </ons-page>
+    </ons-navigator>
+</ons-page>

@@ -1,0 +1,79 @@
+/**/
+.app-background {
+    background-color: #092846
+}
+
+.child {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%); /* Safari and Chrome */
+    -moz-transform: translate(-50%, -50%); /* Firefox */
+    -ms-transform: translate(-50%, -50%); /* IE 9 */
+    -o-transform: translate(-50%, -50%); /* Opera */
+}
+
+
+#myProgress {
+    position: relative;
+    width: 100%;
+    height: 5px;
+    background-color: #ddd;
+}
+
+#myBar {
+    position: absolute;
+    width: 1%;
+    height: 100%;
+    background-color: #f1890e;
+}
+
+.login-section {
+    padding: 8px 20px 8px 20px;
+}
+
+.login-below-section {
+    padding: 50px 20px 8px 20px; color: white
+}
+
+.login-register {
+    color : #f1890e; text-decoration: none
+}
+
+// this is for homepage css
+
+.item {
+  padding: 10px;
+  line-height: 1;
+  height: 91px;
+  overflow: hidden;
+}
+
+.item-thum {
+  background-color: #ccc;
+  width: 70px;
+  height: 70px;
+  border-radius: 4px;
+}
+
+.item-title {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.item-desc {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.3;
+  margin: 4px 0 0 0;
+  padding: 0 30px 0 0;
+  max-height: 30px;
+}
+
+.item-label {
+  font-size: 12px;
+  color: #999;
+  float: right;
+}

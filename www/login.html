@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+        <script src="components/loader.js"></script>
+        <link rel="stylesheet" href="components/loader.css">
+        <link rel="stylesheet" href="css/style.css">
+        <script>
+            var module = ons.bootstrap('my-app', ['onsen']);
+            module.controller('appController', function($scope, $http){
+                
+                $scope.loginUser = function (){
+                    
+                    var email = $scope.email;
+                    var password = $scope.password;
+                    var login_account = {
+                        users_email : email,
+                        users_password : password
+                    }
+                    
+                    $http.post('https://english-staging.fdc-inc.com/api/users/login', login_account)
+                        .success(function(data){
+                            if  (data.error){
+                                $scope.errorMessage = data.error.message;
+                            } else {
+                                window.location.href = 'main.html?token='+data.users_api_token;
+                                $scope.userToken = data.users_api_token;
+                                console.log(data.users_api_token);
+                            }
+                        })
+                        .error(function(error) {
+                            console.log('cannot access');
+                            console.log('Error in accessing the requested url.');
+                        })
+                }                
+            });
+        </script>
+    </head>
+    
+    <body ng-controller="appController">
+        <ons-page style="background-color: #092846">
+            <div style="text-align: center">
+                <img src="images/nativecamp.png" style="margin-top: 150px;"/>
+                <section class="login-section">
+                    <span style="color: red">{{ errorMessage }}</span>
+                </section>
+                <section class="login-section">
+                    <input type="text" class="text-input" ng-model="email" placeholder="Email" style="display: block; width: 100%">
+                </section>
+                <section class="login-section">
+                    <input type="password" class="text-input" ng-model="password" placeholder="Password" style="display: block; width: 100%">
+                </section>
+                <section class="login-section">
+                    <ons-button modifier="large" ng-click="loginUser()">Login</ons-button>
+                </section>
+                <section class="login-below-section">
+                    New to NativeCamp? <br>
+                    <a href="" class="login-register">Register</a>
+                </section>
+            </div>
+        </ons-page>
+    </body>
+</html>

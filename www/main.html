@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+        <script src="components/loader.js"></script>
+        <link rel="stylesheet" href="components/loader.css">
+        <link rel="stylesheet" href="css/style.css">        
+        <script>
+            var module = ons.bootstrap('my-app', ['onsen']);
+            var base_url = 'https://english.fdc-inc.com/api/';
+            module.controller('appController', function($scope, $http){
+                var parameterValue = decodeURIComponent(window.location.search.match(/(\?|&)token\=([^&]*)/)[2]);
+                $scope.userToken = parameterValue;
+                $scope.currentPage = 1;
+                
+                // load first
+                var base_url = 'https://english-staging.fdc-inc.com/api/';
+                var firstLoad = {
+                    users_api_token : parameterValue,
+                    pagination : $scope.currentPage
+                }
+                
+                // memos list
+                var paramForMemoList = {
+                    users_api_token : parameterValue
+                }
+                $scope.memosList = function() {
+                    $http.post(base_url + 'memos/list', paramForMemoList)
+                        .success(function(data) {
+                            $scope.momes = data.memos;
+                            console.log(data);
+                        })
+                        .error(function(error) {
+
+                        })
+                }
+        
+                // lesson message list
+                var paramForLessonMessage = {
+                    users_api_token : parameterValue
+                }
+                $http.post(base_url + 'lesson/messages', paramForLessonMessage)
+                    .success(function(data){
+                        $scope.lessonMessage = data.messages;
+                        console.log(data);
+                    })
+                    .error(function(error){
+                        console.log("Lesson message error " + error);
+                    })
+                
+                // teacher search
+                $http.post(base_url+'teachers/search', firstLoad)
+                    .success(function(data){
+                        $scope.allTeacherSearch = data.teachers;
+                        $scope.hasNext = data.has_next;
+                        $scope.currentPage++;
+                        console.log($scope.allTeacherSearch);
+                    })
+                    .error(function(error) {
+                    
+                    })
+                
+                $scope.singleInstructorClick = function (id) {
+                    var param_for_detail = {
+                        users_api_token : parameterValue,
+                        teachers_id : id
+                    }
+                    $http.post(base_url + 'teachers/detail', param_for_detail)
+                        .success(function(data){
+                             $scope.singleInstInfo = data.teacher;   
+                        })
+                        .error(function(error) {
+
+                        })
+                    console.log($scope.singleInstInfo);
+                }
+                
+                $scope.showMoreTeacher = function() {
+                    var load_more = {
+                        users_api_token : $scope.userToken,
+                        pagination : $scope.currentPage
+                    }
+                    console.log(load_more);
+                }
+            });
+        </script>
+    </head>
+    
+    <body ng-controller="appController">   
+        <ons-tabbar style="background-color: gray;">
+            <ons-tab page="home.html" label="Search" icon="ion-home" active="true"></ons-tab>
+            <ons-tab page="list.html" label="List" icon="ion-chatbox-working"></ons-tab>
+            <ons-tab page="sites.html" label="Appointment" icon="ion-ios-pricetag"></ons-tab>
+            <ons-tab page="settings.html" label="Textbook" icon="ion-ios-cog"></ons-tab>
+            <ons-tab page="settings.html" label="Account" icon="ion-ios-cog"></ons-tab>
+        </ons-tabbar>
+    </body>
+</html>

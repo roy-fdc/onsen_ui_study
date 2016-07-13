@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+        <script src="components/loader.js"></script>
+        <link rel="stylesheet" href="components/loader.css">
+        <link rel="stylesheet" href="css/style.css">
+        <script>
+            var module = ons.bootstrap('my-app', ['onsen']);
+            module.controller('appController', function($scope, $http){
+                
+                // for progress bar
+                var elem = document.getElementById("myBar");
+                var width = 1;
+                var id = setInterval(frame, 30);
+                function frame() {
+                    if (width >= 100) {
+                        clearInterval(id);
+                        
+                        window.location.href = 'login.html';
+                    } else {
+                        width++;
+                        elem.style.width = width + '%';
+                    }
+                }
+            });
+        </script>
+    </head>
+    
+    <body ng-controller="appController">
+        <ons-page style="background-color: #092846">
+            <div class="child">
+                <img src="images/nativecamp.png"/>
+                <div id="myProgress">
+                    <div id="myBar"></div>
+                </div>
+            </div>
+        </ons-page>
+    </body>
+    
+</html>

@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<ons-page>
+    <ons-navigator title="Navigator" var="myNavigator">
+        <ons-page>
+            <ons-toolbar>
+                <div class="center">
+                    <div class="app-background">
+                        <section style="padding: 8px 8px 8px">
+                            <input type="search" class="search-input" ng-model="searchText" placeholder="Search"></input>
+                        </section>
+                    </div>
+                </div>
+            </ons-toolbar>
+
+            <ons-scroller>
+                <ons-list>
+                    <div class="row" onclick="myNavigator.pushPage('single-instructor.html', { animation : 'slide' } )" ng-click="singleInstructorClick(teacher.id)" ng-repeat="teacher in allTeacherSearch" style="border-bottom: 1px solid #ddd; margin-left: 5px; padding: 5px 0px 5px 0px">
+                        <div class="col-xs-3">
+                            <img ng-src="{{ teacher.image_main }}" class="item-thum img-circle"/>
+                        </div>
+                        <div class="col-xs-7">
+                            {{ teacher.name }}
+                            <br>
+                            <small>Rating : {{ teacher.rating }} Lessons : {{ teacher.lessons }}</small>
+                            <br>
+                            <img src="images/like.png" style="widows: 20px; height: 20px;"/> 
+                            <small> {{ teacher.goods }} </small>
+                        </div>
+                        <div class="col-xs-1">
+                            <img src="images/starlight.png" ng-if="teacher.favorite" style="width: 20px; height: 20px;">
+                            <img src="images/stardark.png" ng-if="!teacher.favorite" style="width: 20px; height: 20px;">
+                        </div>
+                    </div>
+                </ons-list>
+            </ons-scroller>
+        </ons-page>
+    </ons-navigator>
+</ons-page>

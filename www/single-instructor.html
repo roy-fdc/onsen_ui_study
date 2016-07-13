@@ -1,0 +1,47 @@
+
+    <ons-page>
+       <ons-toolbar>
+           <div class="left">
+               <ons-back-button>Back</ons-back-button>
+           </div>
+           <div class="center">
+               
+           </div>
+       </ons-toolbar>
+
+        <div style=" margin: 5px">
+            <div style="background-color: black; height: 150px;"></div>
+            <div style="background-color: #eee; padding: 10px; margin-top: 10px;">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <img ng-src="{{ singleInstInfo.images.main }}" class="item-thum img-circle"/>
+                    </div>
+                    <div class="col-xs-7">
+                        {{ singleInstInfo.name }}
+                        <br>
+                        <small>Rating : {{ singleInstInfo.rating }} Lessons : {{ singleInstInfo.lessons }}</small>
+                        <br>
+                        <img src="images/like.png" style="widows: 20px; height: 20px;"> 
+                        <small> {{ singleInstInfo.goods }} </small>
+                    </div>
+                    <div class="col-xs-1">
+                        <img src="images/starlight.png" ng-if="singleInstInfo.favorite" style="width: 20px; height: 20px;">
+                        <img src="images/stardark.png" ng-if="!singleInstInfo.favorite" style="width: 20px; height: 20px;">
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background-color: #eee; padding: 10px; margin-top: 10px;">
+                {{ singleInstInfo.message }}
+                <br>
+                <div style="text-align: center; color: green">Read More</div>
+            </div>
+            
+            <div style="background-color: #eee; padding: 10px; margin-top: 10px; text-align: center">
+                <ons-button>RESERVE LESSON</ons-button>
+                <ons-button modifier="cta">SCHEDULE</ons-button>
+            </div>
+            
+        </div>
+    </ons-page>
+
